@@ -1,19 +1,15 @@
 package com.directi.training.dip.exercise;
 
-import java.util.Base64;
+public class EncodingModuleClient {
+    public static void main(String[] args) throws Exception {
+        DataReader fileReader = new FileDataReader("DIP/src/com/directi/training/dip/exercise/beforeEncryption.txt");
+        DataWriter fileWriter = new FileDataWriter("DIP/src/com/directi/training/dip/exercise/afterEncryption.txt");
+        EncodingModule fileEncodingModule = new EncodingModule(fileReader, fileWriter);
+        fileEncodingModule.encode();
 
-public class EncodingModule {
-    private DataReader reader;
-    private DataWriter writer;
-
-    public EncodingModule(DataReader reader, DataWriter writer) {
-        this.reader = reader;
-        this.writer = writer;
-    }
-
-    public void encode() throws Exception {
-        String inputData = reader.read();
-        String encodedData = Base64.getEncoder().encodeToString(inputData.getBytes());
-        writer.write(encodedData);
+        DataReader networkReader = new NetworkDataReader("http://myfirstappwith.appspot.com/index.html");
+        DataWriter databaseWriter = new MyDatabase();
+        EncodingModule networkEncodingModule = new EncodingModule(networkReader, databaseWriter);
+        networkEncodingModule.encode();
     }
 }

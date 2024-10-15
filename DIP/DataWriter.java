@@ -1,5 +1,5 @@
 package com.directi.training.dip.exercise;
 
-public class DataWriter {
-
+public interface DataWriter {
+    void write(String data) throws Exception;
 }

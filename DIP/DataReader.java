@@ -1,5 +1,5 @@
 package com.directi.training.dip.exercise;
 
-public class DataReader {
-
+public interface DataReader {
+    String read() throws Exception;
 }
